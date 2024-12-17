@@ -26,6 +26,8 @@ A lot of security systems out there are expensive and can be difficult to set up
 
 ## **2.Diagrams**
 ![image](https://github.com/user-attachments/assets/cdc49d3e-e275-4b51-b4ec-edb934304796)
+![image](https://github.com/user-attachments/assets/14c6337c-a5f5-4bc3-aa8e-5e9ce893afe6)
+
 
 
 ## **3. Bill of Materials (BOM)**
@@ -68,13 +70,13 @@ A lot of security systems out there are expensive and can be difficult to set up
 | 1 & 16      | GND           | Pin 1                | Ground connection      |
 | 2 & 15      | 3.3V          | Pin 3                | Power (3.3V)           |
 | 3           | -             | Pin 2                | LCD contrast control   |
-| 4           | GPIO 22       | -                    | RS Pin                 |
+| 4           | GPIO 12       | -                    | RS Pin                 |
 | 5           | GND           | -                    | R/W Pin (Grounded)     |
-| 6           | GPIO 23       | -                    | Enable Pin             |
-| 11          | GPIO 5        | -                    | Data Pin D4            |
-| 12          | GPIO 18       | -                    | Data Pin D5            |
-| 13          | GPIO 19       | -                    | Data Pin D6            |
-| 14          | GPIO 21       | -                    | Data Pin D7            |
+| 6           | GPIO 14       | -                    | Enable Pin             |
+| 11          | GPIO 27        | -                    | Data Pin D4            |
+| 12          | GPIO 2       | -                    | Data Pin D5            |
+| 13          | GPIO 15       | -                    | Data Pin D6            |
+| 14          | GPIO 13       | -                    | Data Pin D7            |
 
 **Potentiometer**: 50k potentiometer adjusts the LCD brightness.
 
