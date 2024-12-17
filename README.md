@@ -6,7 +6,6 @@ A lot of security systems out there are expensive and can be difficult to set up
 - **Secure Mode**: Activated when the user is away from home. If the PIR sensor detects movement, the alarm sounds for 10 seconds. The LED flashes rapidly to signal an intrusion. If the ENS160 sensor detects anomalies (toxic gas or poor air quality) a warning message is sent to the phone via WiFi or Bluetooth. The LCD is locked and navigation through menus is disabled. When the user returns home, they must scan a valid RFID card to deactivate Secure mode and activate Normal mode.
 - **Normal Mode**: Activated when the user is home. If the ENS160 sensor detects anomalies, the alarm sounds until conditions return to normal, or is disabled. The LED flashes slowly to signal the issue. If the PIR sensor detects movement,the alarm sounds to signal unexpected presence. The LDR sensor monitors ambient light levels:as it gets darker, the LED gradually becomes brighter. The LCD is active and displays sensor data.
 
-![image](https://github.com/user-attachments/assets/f2943e64-69d5-4247-880b-fb778025ef50)
 
 
 
@@ -26,24 +25,25 @@ A lot of security systems out there are expensive and can be difficult to set up
 ---
 
 ## **2.Diagrams**
-![image](https://github.com/user-attachments/assets/6f549983-ff19-4973-a585-8e08b584c337)
+![image](https://github.com/user-attachments/assets/cdc49d3e-e275-4b51-b4ec-edb934304796)
+
 
 ## **3. Bill of Materials (BOM)**
 
 
 | **Component**       | **Description**              | **Datasheet**                        | **Source/Purchase Link**             |
 |----------------------|------------------------------|--------------------------------------|--------------------------------------|
-| ESP32          | Microcontroller             | [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf) | [Purchase Link](link_to_store)       |
-| 16x2 LCD             | Display for data            | [LCD Datasheet](link_to_datasheet)   | [Purchase Link](link_to_store)       |
-| 50k Potentiometer    | Brightness control for LCD  | [Potentiometer Datasheet](link_to_datasheet) | [Purchase Link](link_to_store)       |
-| PIR Sensor           | Motion detection            | [PIR Datasheet](link_to_datasheet)   | [Purchase Link](link_to_store)       |
-| ENS160 Sensor        | Air quality sensor          | [ENS160 Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
-| AHT2x Sensor         | Temperature & Humidity      | [AHT2x Datasheet](link_to_datasheet) | [Purchase Link](link_to_store)       |
-| LDR Sensor           | Light detection             | [LDR Datasheet](link_to_datasheet)   | [Purchase Link](link_to_store)       |
-| RFID Module          | Secure mode activation      | [RFID Datasheet](link_to_datasheet)  | [Purchase Link](link_to_store)       |
-| Passive Buzzer       | Alarm                       | [Buzzer Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
-| Red LED              | Alert indicator             | [Red LED Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
-| Jumper Wires         | Connections                 | [Jumper Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
+| ESP32          | Microcontroller             | [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf) | [Purchase Link](https://www.robofun.ro/platforme-de-dezvoltare/esp-wroom-32-wifi-module-ch340-type-c.html)       |
+| 16x2 LCD             | Display for data            |                                       | Kit       |
+| 50k Potentiometer    | Brightness control for LCD  |                                       | Kit      |
+| PIR Sensor           | Motion detection            |                                           | [Purchase Link](https://www.robofun.ro/senzori/modul-senzor-de-miscare-pir.html)       |
+| ENS160 Sensor        | Air quality sensor          | [ENS160 Datasheet](https://www.mouser.com/datasheet/2/1081/SC_001224_DS_1_ENS160_Datasheet_Rev_0_95-2258311.pdf?srsltid=AfmBOopD5iQ_zGEQW9MNsx139wTIkgXACXXDjR8WssaWiWnYD_jbje7h)|       |
+| AHT2x Sensor         | Temperature & Humidity      | [AHT2x Datasheet](link_to_datasheet) |        |
+| LDR Sensor           | Light detection             |    | Kit       |
+| RFID Module          | Secure mode activation      |  |        |
+| Passive Buzzer       | Alarm                       | | Kit       |
+| Red LED              | Alert indicator             | | Kit       |
+| Jumper Wires         | Connections                 | | Kit     |
 
 ---
 
