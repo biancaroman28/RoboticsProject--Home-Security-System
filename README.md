@@ -11,10 +11,8 @@ A lot of security systems out there are expensive and can be difficult to set up
 
 
 ## Hardware Design
-## **2. Components and Their Roles**
-Here is a list of the components used in the project along with their roles:
-
-- **ESP32 Devkit**: The microcontroller acts as the central processing unit, handling all sensor data, processing inputs, and managing outputs.  
+## **1. Components and Their Roles**
+- **ESP32**: The microcontroller acts as the central processing unit, handling all sensor data, processing inputs, and managing outputs.  
 - **16x2 LCD**: Displays sensor readings and system status.  
 - **PIR Sensor**: Detects motion for intrusion detection.  
 - **ENS160 Sensor**: Monitors air quality and gas presence.  
@@ -22,55 +20,41 @@ Here is a list of the components used in the project along with their roles:
 - **LDR Sensor**: Monitors ambient light levels for day/night detection.  
 - **RFID Module**: Activates or deactivates Secure Mode using valid RFID cards.  
 - **Passive Buzzer**: Sounds an alarm for anomalies or intrusions.  
-- **Red LED**: Indicates intrusions or system alerts.  
+- **LED**: Indicates intrusions or system alerts.  
 - **50k Potentiometer**: Used for LCD brightness control.  
 
 ---
 
-## **3. Block Diagram**
-Below is the block diagram of the project, showing all components and their connections to the ESP32 microcontroller:
+## **2.Diagrams**
+![image](https://github.com/user-attachments/assets/6f549983-ff19-4973-a585-8e08b584c337)
 
-![Block Diagram](path_to_your_image)  
-*Figure 1: Block Diagram of the System.*
+## **3. Bill of Materials (BOM)**
 
----
 
-## **4. Circuit Schematic**
-The electrical connections between components are represented in the circuit schematic:
-
-![Circuit Schematic](path_to_your_circuit_image)  
-*Figure 2: Electrical Schematic of the System.*
-
----
-
-## **5. Bill of Materials (BOM)**
-The table below lists all the components used in the project with relevant links and datasheets:
-
-| **Component**       | **Description**              | **Quantity** | **Link/Datasheet**                   |
-|----------------------|------------------------------|-------------|--------------------------------------|
-| ESP32 Devkit         | Microcontroller             | 1           | [ESP32 Datasheet](link_here)         |
-| 16x2 LCD             | Display for data            | 1           | [LCD Module](link_here)              |
-| 50k Potentiometer    | Brightness control for LCD  | 1           | [Potentiometer Datasheet](link_here) |
-| PIR Sensor           | Motion detection            | 1           | [PIR Sensor Datasheet](link_here)    |
-| ENS160 Sensor        | Air quality sensor          | 1           | [ENS160 Datasheet](link_here)        |
-| AHT2x Sensor         | Temperature & Humidity      | 1           | [AHT2x Datasheet](link_here)         |
-| LDR Sensor           | Light detection             | 1           | [LDR Info](link_here)                |
-| RFID Module          | Secure mode activation      | 1           | [RFID Datasheet](link_here)          |
-| Passive Buzzer       | Alarm                       | 1           | [Buzzer Info](link_here)             |
-| Red LED              | Alert indicator             | 1           | [Red LED Info](link_here)            |
-| Jumper Wires         | Connections                 | -           | [Jumper Wires](link_here)            |
+| **Component**       | **Description**              | **Datasheet**                        | **Source/Purchase Link**             |
+|----------------------|------------------------------|--------------------------------------|--------------------------------------|
+| ESP32          | Microcontroller             | [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf) | [Purchase Link](link_to_store)       |
+| 16x2 LCD             | Display for data            | [LCD Datasheet](link_to_datasheet)   | [Purchase Link](link_to_store)       |
+| 50k Potentiometer    | Brightness control for LCD  | [Potentiometer Datasheet](link_to_datasheet) | [Purchase Link](link_to_store)       |
+| PIR Sensor           | Motion detection            | [PIR Datasheet](link_to_datasheet)   | [Purchase Link](link_to_store)       |
+| ENS160 Sensor        | Air quality sensor          | [ENS160 Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
+| AHT2x Sensor         | Temperature & Humidity      | [AHT2x Datasheet](link_to_datasheet) | [Purchase Link](link_to_store)       |
+| LDR Sensor           | Light detection             | [LDR Datasheet](link_to_datasheet)   | [Purchase Link](link_to_store)       |
+| RFID Module          | Secure mode activation      | [RFID Datasheet](link_to_datasheet)  | [Purchase Link](link_to_store)       |
+| Passive Buzzer       | Alarm                       | [Buzzer Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
+| Red LED              | Alert indicator             | [Red LED Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
+| Jumper Wires         | Connections                 | [Jumper Datasheet](link_to_datasheet)| [Purchase Link](link_to_store)       |
 
 ---
 
-## **6. Detailed Hardware Description**
-Below is a detailed explanation of the hardware setup and functionalities:
+## **5. Detailed Hardware Description**
 
-### **ESP32 Devkit**
+### **ESP32**
 - The ESP32 acts as the central microcontroller managing all inputs and outputs.
 - Interfaces:  
-  - **I2C**: ENS160, AHT2x Sensors, and LCD  
+  - **I2C**: ENS160, AHT2x Sensors  
   - **SPI**: RFID Module  
-  - **GPIO/PWM**: PIR sensor, buzzer, LED, and LDR  
+  - **GPIO/PWM**: PIR sensor, buzzer, LED, LCD, and LDR  
 
 ---
 
@@ -82,7 +66,7 @@ Below is a detailed explanation of the hardware setup and functionalities:
 |-------------|---------------|-----------------------|------------------------|
 | 1 & 16      | GND           | Pin 1                | Ground connection      |
 | 2 & 15      | 3.3V          | Pin 3                | Power (3.3V)           |
-| 3           | Signal (Pin 2)| -                    | LCD contrast control   |
+| 3           | -             | Pin 2                | LCD contrast control   |
 | 4           | GPIO 22       | -                    | RS Pin                 |
 | 5           | GND           | -                    | R/W Pin (Grounded)     |
 | 6           | GPIO 23       | -                    | Enable Pin             |
@@ -147,8 +131,7 @@ Below is a detailed explanation of the hardware setup and functionalities:
 
 ---
 
-## **7. Pin Mapping**
-Below is the complete pin mapping for the project:
+## **6. Pin Mapping**
 
 | **Component**        | **ESP32 Pin**      | **Purpose**                |
 |-----------------------|--------------------|----------------------------|
@@ -164,13 +147,22 @@ Below is the complete pin mapping for the project:
 
 ---
 
-## **8. Hardware Images and Proof of Functionality**
+## **7. Hardware Images and Proof of Functionality**
 ### **Image 1: Components Connected**
-![Components Connected](path_to_your_image)  
+![image](https://github.com/user-attachments/assets/062940bd-4cc3-4656-a09b-3dfddd561aad)
+  
 
 ### **Image 2: Working Component Example**
-![Working Example](path_to_working_example_image)  
-*Figure X: Demonstration of the RFID module successfully activating Normal Mode.*
+![image](https://github.com/user-attachments/assets/6fd86ac7-9a33-471c-be5f-e420d2aaae4b)
+
+
+https://github.com/user-attachments/assets/bcbf2db4-0fdf-4d63-8e8c-8716478da93b
+
+
+
+https://github.com/user-attachments/assets/9d53ba2b-810f-4c06-86e0-a586a8709767
+
+
 
 
 ## Software Design
