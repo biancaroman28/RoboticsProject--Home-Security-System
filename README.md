@@ -54,7 +54,8 @@ A lot of security systems out there are expensive and can be difficult to set up
 - Interfaces:  
   - **I2C**: ENS160, AHT2x Sensors  
   - **SPI**: RFID Module  
-  - **GPIO/PWM**: PIR sensor, buzzer, LED, LCD, and LDR  
+  - **GPIO/PWM**: PIR sensor, buzzer, LED, LCD
+  - **ADC**: LDR Sensor
 
 ---
 
