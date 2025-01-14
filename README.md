@@ -170,6 +170,176 @@ https://github.com/user-attachments/assets/9d53ba2b-810f-4c06-86e0-a586a8709767
 
 ## Software Design
 
+## Libraries Used
+1. **`WiFi.h`**:
+   - Provides Wi-Fi functionality to connect to a wireless network.
+   - Used for sending WhatsApp alerts.
+
+2. **`HTTPClient.h`**:
+   - Facilitates HTTP requests to the CallMeBot API for sending messages.
+
+3. **`Adafruit_AHTX0`**:
+   - Driver for the AHT20 temperature and humidity sensor.
+   - Used for periodic sensor readings in Normal Mode.
+
+4. **`LiquidCrystal_I2C.h`**:
+   - Controls the I2C-based LCD display.
+   - Displays sensor data and mode transitions.
+
+5. **`MFRC522.h`**:
+   - Driver for the RFID module.
+   - Enables switching between Secure and Normal modes using RFID cards.
+
+6. **`ScioSense_ENS160.h`**:
+   - Driver for the ENS160 air quality sensor.
+   - Future integration for enhanced gas level monitoring.
+
+7. **`UrlEncode.h`**:
+   - Encodes the message text to be sent via HTTP requests.
+
+---
+
+## Laboratory Concepts Utilized
+
+### 1. **Timers and Interrupts**
+   - **Lab Usage**: Configuring timed tasks and debouncing button presses.
+   - **Implementation**: 
+     - Timed sensor readings in Normal Mode.
+     - Debouncing the button to switch data labels.
+
+### 2. **Timers and PWM**
+   - **Lab Usage**: Generating pulse-width modulation (PWM) signals.
+   - **Implementation**:
+     - Buzzer activation with specific frequencies during motion detection in Secure Mode.
+
+### 3. **Analog-to-Digital Conversion (ADC)**
+   - **Lab Usage**: Reading analog sensors.
+   - **Implementation**:
+     - Reading gas levels from an MQ2 sensor via the ESP32's ADC pin.
+
+### 4. **SPI Communication**
+   - **Lab Usage**: Communication with SPI-based devices.
+   - **Implementation**:
+     - Interfacing with the MFRC522 RFID module for mode switching.
+
+### 5. **I2C Communication**
+   - **Lab Usage**: Communication with I2C-based devices.
+   - **Implementation**:
+     - Interfacing with the AHT20 sensor for temperature and humidity readings.
+     - Controlling the I2C LCD for data display.
+
+---
+
+## Code Explanation
+
+### Initialization
+```cpp
+// Includes and global configurations
+#include <Arduino.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <Wire.h>
+#include <Adafruit_AHTX0.h>
+#include "ScioSense_ENS160.h"
+#include <LiquidCrystal_I2C.h>
+#include <UrlEncode.h>
+#include <MFRC522.h>
+
+// ENS160 configuration
+ScioSense_ENS160 ens160(ENS160_I2CADDR_1); // ENS160 address: 0x53
+
+// LCD configuration
+LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD address: 0x27
+
+// AHT20 sensor
+Adafruit_AHTX0 aht;
+```
+- Initializes the required libraries and configures the hardware components.
+- Defines the I2C addresses for the ENS160 sensor and LCD.
+
+### Secure Mode
+```cpp
+void handleSecureMode() {
+  if (digitalRead(PIR_PIN) == HIGH) {
+    lastMotionTime = millis();
+    digitalWrite(LED_PIN, HIGH);
+    tone(BUZZER_PIN, 1000);
+
+    if (millis() - lastMessageTime > messageCooldown) {
+      sendMessage("Motion detected in Secure Mode!");
+      lastMessageTime = millis();
+    }
+  } else {
+    digitalWrite(LED_PIN, LOW);
+    noTone(BUZZER_PIN);
+  }
+
+  if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()) {
+    secureMode = false;
+    lastRFIDScanTime = millis();
+    digitalWrite(LED_PIN, LOW);
+    noTone(BUZZER_PIN);
+    lcd.clear();
+    lcd.print("Normal Mode");
+    delay(2000);
+    lcd.clear();
+  }
+}
+```
+- Detects motion using the PIR sensor.
+- Activates the LED and buzzer and sends a WhatsApp message.
+- Switches to Normal Mode upon scanning an RFID card.
+
+### Normal Mode
+```cpp
+void handleNormalMode() {
+  if (millis() - lastSensorReadTime > sensorReadInterval) {
+    readSensors();
+    lastSensorReadTime = millis();
+  }
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(dataLabels[dataIndex]);
+  lcd.setCursor(0, 1);
+  lcd.print(dataValues[dataIndex]);
+  lcd.print(dataIndex == 2 ? " PPM" : "");
+
+  if (digitalRead(BUTTON_PIN) == LOW && millis() - lastButtonPressTime > debounceDelay) {
+    lastButtonPressTime = millis();
+    dataIndex = (dataIndex + 1) % 3;
+  }
+
+  if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()) {
+    if (millis() - lastRFIDScanTime > rfidCooldown) {
+      secureMode = true;
+      lcd.clear();
+      lcd.print("Secure Mode");
+      delay(2000);
+      lcd.clear();
+    }
+  }
+}
+```
+- Reads and displays sensor data.
+- Switches between data labels with a button press.
+- Returns to Secure Mode upon RFID card scanning.
+
+---
+
+## Validation
+- **Sensor Readings**:
+  Verified sensor values on the LCD in Normal Mode.
+- **Secure Mode Alerts**:
+  Confirmed WhatsApp messages are sent upon motion detection.
+- **Mode Switching**:
+  Tested RFID-based transitions between Secure and Normal modes.
+- **Button Debouncing**:
+  Ensured smooth switching of data labels without false triggers.
+
+---
+
+
 
 ## Results
 
